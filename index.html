@@ -412,6 +412,60 @@
   .prod-points li{display:flex;align-items:center;gap:.6rem}
   .prod-points li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);flex:none}
   @media(max-width:900px){.product{grid-template-columns:1fr}.prod-img{min-height:0;aspect-ratio:4/3}}
+
+  /* ================= RITUAL: badges + connector ================= */
+  .steps{gap:clamp(28px,3vw,48px);margin-top:clamp(48px,8vh,84px)}
+  .step-c{padding-top:0;border-top:0}
+  .step-c .sn{position:relative;top:auto;left:auto;z-index:1;display:grid;place-items:center;width:68px;height:68px;border-radius:50%;
+    border:2px solid var(--gold);background:var(--emerald);color:var(--gold);font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:600;line-height:1;letter-spacing:.02em}
+  .step-c:not(:last-child)::after{content:"";position:absolute;top:33px;left:84px;right:calc(-1 * clamp(28px,3vw,48px) + 14px);height:2px;
+    background:linear-gradient(90deg,var(--gold),rgba(214,177,94,.22));transform-origin:left;transform:scaleX(1);transition:transform 1.1s cubic-bezier(.65,0,.35,1) .25s}
+  html.js-ready .step-c.rv:not(.in):not(:last-child)::after{transform:scaleX(0)}
+  .step-c h3{margin-top:1.7rem;font-weight:600;font-size:clamp(24px,2.2vw,31px);letter-spacing:.005em}
+  .step-c p{margin-top:.8rem;font-size:16.5px;line-height:1.7;color:rgba(255,248,242,.86);max-width:30ch}
+  .ritual .fine{font-size:12.5px;font-weight:600;letter-spacing:.14em;color:rgba(232,210,160,.8)}
+  @media(max-width:1024px){
+    .steps{gap:40px}
+    .step-c{padding-left:92px;min-height:68px}
+    .step-c .sn{position:absolute;left:0;top:0}
+    .step-c h3{margin-top:.55rem}
+    .step-c:not(:last-child)::after{top:80px;left:33px;right:auto;width:2px;height:calc(100% - 52px);background:linear-gradient(180deg,var(--gold),rgba(214,177,94,.22));transform-origin:top}
+    html.js-ready .step-c.rv:not(.in):not(:last-child)::after{transform:scaleY(0)}
+  }
+
+  /* ================= ASK LIVEWELL CHAT ================= */
+  .lw-fab{position:fixed;right:22px;bottom:22px;z-index:980;display:flex;align-items:center;gap:.7rem;padding:.95rem 1.4rem .95rem 1.05rem;border:0;border-radius:999px;
+    background:var(--emerald);color:var(--paper);font:600 15px/1 Inter,system-ui,sans-serif;letter-spacing:.01em;cursor:pointer;box-shadow:0 18px 40px -12px rgba(8,42,31,.6),0 0 0 1px rgba(214,177,94,.5)}
+  .lw-fab .dot{width:30px;height:30px;border-radius:50%;background:var(--gold);display:grid;place-items:center;color:var(--emerald-2);font:700 15px/1 "Cormorant Garamond",serif}
+  .lw-fab:hover{background:var(--emerald-2)}
+  .lw-chat{position:fixed;right:22px;bottom:22px;z-index:990;width:min(400px,calc(100vw - 28px));height:min(620px,calc(100dvh - 40px));display:none;flex-direction:column;
+    background:var(--paper);border-radius:16px;overflow:hidden;box-shadow:0 40px 90px -20px rgba(8,42,31,.55),0 0 0 1px rgba(214,177,94,.45);font-family:Inter,system-ui,sans-serif}
+  .lw-chat.on{display:flex;animation:lwIn .32s cubic-bezier(.22,.61,.36,1)}
+  @keyframes lwIn{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+  .lw-head{display:flex;align-items:center;gap:.8rem;padding:1rem 1.1rem;background:var(--emerald);color:var(--paper)}
+  .lw-head .av{width:40px;height:40px;border-radius:50%;background:var(--gold);color:var(--emerald-2);display:grid;place-items:center;font:700 19px/1 "Cormorant Garamond",serif;flex:none}
+  .lw-head .t{flex:1;min-width:0}
+  .lw-head strong{display:block;font:600 21px/1.1 "Cormorant Garamond",serif;letter-spacing:.01em}
+  .lw-head small{display:block;font-size:12.5px;color:rgba(255,248,242,.78);margin-top:2px}
+  .lw-x{width:38px;height:38px;border-radius:50%;border:1px solid rgba(214,177,94,.55);background:transparent;color:var(--paper);font-size:20px;line-height:1;cursor:pointer}
+  .lw-log{flex:1;overflow-y:auto;padding:1.1rem;display:flex;flex-direction:column;gap:.7rem;background:var(--sand)}
+  .lw-msg{max-width:86%;padding:.75rem 1rem;border-radius:14px;font-size:15.5px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+  .lw-msg.bot{align-self:flex-start;background:#fff;color:var(--ink);border:1px solid var(--line);border-bottom-left-radius:4px}
+  .lw-msg.me{align-self:flex-end;background:var(--emerald);color:var(--paper);border-bottom-right-radius:4px}
+  .lw-typing{display:inline-flex;gap:4px;padding:2px 0}
+  .lw-typing i{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:lwDot 1s infinite ease-in-out}
+  .lw-typing i:nth-child(2){animation-delay:.15s}.lw-typing i:nth-child(3){animation-delay:.3s}
+  @keyframes lwDot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+  .lw-quick{display:flex;flex-wrap:wrap;gap:.45rem;padding:.7rem 1.1rem .2rem;background:var(--sand)}
+  .lw-quick button{border:1.5px solid rgba(11,61,46,.35);background:#fff;color:var(--emerald);border-radius:999px;padding:.5rem .85rem;font:600 13.5px/1.1 Inter,system-ui,sans-serif;cursor:pointer}
+  .lw-quick button:hover{background:var(--emerald);color:var(--paper)}
+  .lw-form{display:flex;gap:.5rem;padding:.8rem;border-top:1px solid var(--line);background:var(--paper)}
+  .lw-form input{flex:1;min-width:0;border:1.5px solid rgba(11,61,46,.35);border-radius:999px;padding:.85rem 1.1rem;font:16px Inter,system-ui,sans-serif;color:var(--ink);background:#fff}
+  .lw-form input:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+  .lw-form button{border:0;border-radius:999px;padding:0 1.2rem;background:var(--gold);color:var(--emerald-2);font:700 14px Inter,system-ui,sans-serif;cursor:pointer}
+  .lw-form button:disabled{opacity:.5;cursor:default}
+  .lw-note{padding:0 1.1rem .7rem;background:var(--paper);font-size:11.5px;color:var(--ink-soft)}
+  @media(prefers-reduced-motion:reduce){.lw-chat.on{animation:none}.lw-typing i{animation:none;opacity:.7}}
 </style>
 </head>
 <body>
@@ -1265,6 +1319,128 @@
     setTimeout(function(){ badge.classList.remove("pop"); }, 360);
   }
   sel.addEventListener("change", update);
+})();
+</script>
+
+<!-- ASK LIVEWELL -->
+<button class="lw-fab" id="lwFab" type="button" aria-haspopup="dialog" aria-controls="lwChat"><span class="dot" aria-hidden="true">L</span>Ask Livewell</button>
+<section class="lw-chat" id="lwChat" role="dialog" aria-label="Ask Livewell">
+  <div class="lw-head">
+    <span class="av" aria-hidden="true">L</span>
+    <div class="t"><strong>Ask Livewell</strong><small id="lwMode">AI assistant · answers about Talbina Royale</small></div>
+    <button class="lw-x" id="lwClose" type="button" aria-label="Close chat">&times;</button>
+  </div>
+  <div class="lw-log" id="lwLog" aria-live="polite"></div>
+  <div class="lw-quick" id="lwQuick"></div>
+  <form class="lw-form" id="lwForm" autocomplete="off">
+    <label for="lwInput" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Your question</label>
+    <input id="lwInput" type="text" maxlength="400" placeholder="Ask anything about Talbina…">
+    <button type="submit" id="lwSend">Send</button>
+  </form>
+  <p class="lw-note">Automated assistant. Not medical advice.</p>
+</section>
+
+<script>
+/* Set this to your deployed Cloudflare Worker URL to get live AI answers on any host (see chat-worker/README.md). */
+window.LIVEWELL_CHAT_ENDPOINT = window.LIVEWELL_CHAT_ENDPOINT || "";
+</script>
+<script>
+(function(){
+  "use strict";
+  var FACTS = [
+    "Brand: Livewell (Livewell Nourish). Product: Livewell Talbina Royale, Premium Sachet Edition. Tagline: Live well, everyday.",
+    "Talbina is a warm porridge made from barley with a smooth, comforting texture. The name comes from the Arabic word laban (milk), because it looks soft and white.",
+    "History: talbina dates to 7th-century Madinah, about 1,400 years ago. Aisha (RA) had it cooked for grieving relatives and narrated that the Prophet (peace be upon him) said talbina soothes the heart of the sick and relieves some of the sorrow (Sahih al-Bukhari 5417, Sahih Muslim 2216). Ibn Sina wrote about barley water in the 11th century. Ibn al-Qayyim explained it is made from barley flour with its bran.",
+    "Ingredients printed on the pack: barley, almonds, pistachios. No preservatives, no synthetic food colour.",
+    "Allergens on the pack: gluten (barley) and tree nuts (almonds, pistachios). Preparing with milk adds dairy.",
+    "Nutrition per 16 g sachet (dry mix, approximate, tested by an NABL-certified lab): 64 kcal, protein 1.12 g, carbohydrate 10.72 g, total sugar 0.49 g, dietary fibre 1.44 g, saturated fat 0.21 g, sodium 24.48 mg. The milk you add is extra.",
+    "Pack: 15 individually sealed sachets of 16 g. One sachet makes one bowl.",
+    "Preparation: empty one sachet into a saucepan, add 200 ml milk (or water), stir, simmer on a low flame for 5 to 7 minutes stirring occasionally, serve warm. Top with fruit, nuts or honey if you like. The pack advises people with diabetes not to add honey.",
+    "When to eat: breakfast, an evening meal, or any time you want something warm.",
+    "Storage: keep sachets sealed in a cool, dry place away from direct sunlight. Do not use if the pack or sachet is opened or damaged.",
+    "Prices on this site: 1 box Rs 350 (was Rs 450, 22% off). 2 boxes Rs 599 (was Rs 900, 33% off). 3 boxes Rs 799 (was Rs 1,350, 40% off). Buy now goes to the product page on livewellnourish.com, where payment is completed.",
+    "Manufacturer: Livewell, 06 Shital Square Shopping, Bypass Road, Bharuch, Gujarat 392001. FSSAI licence no. 20726007000342. Tested by an NABL-certified laboratory. Product of India.",
+    "Customer care: phone +91 93133 66397, email thagyaanas@gmail.com. Shipping, returns and refunds follow the policy pages on livewellnourish.com; the assistant does not know delivery times or fees.",
+    "Talbina is food, not medicine. Never give medical advice. People with a health condition, pregnancy, diabetes or allergies, or buying for young children, should ask their doctor."
+  ];
+  var SYSTEM = "You are Ask Livewell, the friendly assistant on the Livewell Talbina website. Answer in 1 to 4 short plain-text sentences, warm and direct, no markdown, no lists unless giving steps. Use ONLY the facts below. If the answer is not in the facts, say you don't have that detail and give the customer care phone and email. Never give medical advice or make health claims beyond the facts, never invent prices, delivery times, certifications or policies. Politely steer off-topic questions back to Talbina.\n\nFACTS:\n- " + FACTS.join("\n- ");
+
+  var KB = [
+    {k:["hello","hi ","hey","salam","assalam","hii"],a:"Hello! I can answer questions about Talbina Royale: what it is, its story, how to make it, what's in it, nutrition, prices and storage. What would you like to know?"},
+    {k:["what is","what's talbina","whats talbina","meaning","name","mean","laban","talbina?"],a:"Talbina is a warm barley porridge with a smooth, comforting texture. The name comes from laban, the Arabic word for milk, because cooked barley flour turns soft and white."},
+    {k:["history","story","old","origin","1400","1,400","prophet","sunnah","hadith","aisha","ancient","come from","tradition","islam"],a:"Talbina goes back to 7th-century Madinah, about 1,400 years ago. Aisha (RA) had it cooked for grieving relatives and narrated that the Prophet ﷺ said it soothes the heart of the sick and relieves some of the sorrow (Sahih al-Bukhari 5417, Sahih Muslim 2216)."},
+    {k:["ingredient","contain","inside","made of","made from","whats in","what's in","nuts","preservative","colour","color","additive","walnut","pumpkin"],a:"The pack lists three ingredients: barley, almonds and pistachios. No preservatives and no synthetic food colour."},
+    {k:["calorie","kcal","nutrition","protein","fibre","fiber","carb","fat","sodium","sugar","sweet","healthy"],a:"Per 16 g sachet (dry mix): about 64 kcal, 1.12 g protein, 10.72 g carbohydrate, 0.49 g sugar and 1.44 g fibre. The milk you add is extra."},
+    {k:["allerg","gluten","celiac","coeliac","nut free","dairy","lactose"],a:"Yes, it contains allergens: gluten (barley) and tree nuts (almonds, pistachios). Preparing it with milk adds dairy."},
+    {k:["prepare","make","cook","recipe","how do i","how to","instructions","minutes","simmer","boil"],a:"Empty one sachet into a saucepan, add 200 ml milk (or water), stir, and simmer on a low flame for 5 to 7 minutes, stirring now and then. Serve warm."},
+    {k:["water","milk","vegan","plant","oat milk"],a:"Use 200 ml of milk or water. Milk gives a richer bowl, water a lighter one."},
+    {k:["honey","topping","diabet"],a:"Honey is optional. The pack advises people with diabetes not to add honey, and if you have diabetes it's best to check with your doctor first."},
+    {k:["when","breakfast","night","evening","daily","every day","suhoor","ramadan","iftar"],a:"Any time you want something warm. Most people have it at breakfast or as an evening meal."},
+    {k:["store","storage","keep","shelf","expire","expiry","fridge"],a:"Keep the sachets sealed in a cool, dry place away from direct sunlight. The best-before date is printed on your pack."},
+    {k:["price","cost","how much","rupee","₹","rs","offer","discount","bundle","box","boxes","cheap","deal"],a:"1 box is ₹350 (was ₹450), 2 boxes are ₹599 (was ₹900) and 3 boxes are ₹799 (was ₹1,350). Three boxes work out to about ₹18 a bowl."},
+    {k:["sachet","how many","size","gram","serving","portion","weight"],a:"Each box has 15 individually sealed 16 g sachets. One sachet makes one bowl."},
+    {k:["ship","deliver","courier","arrive","cod","cash on delivery","track","return","refund","exchange","cancel"],a:"Shipping and returns follow the policies on livewellnourish.com. For anything about an order, call +91 93133 66397 or email thagyaanas@gmail.com."},
+    {k:["contact","email","phone","call","whatsapp","support","human","person","speak","number"],a:"You can reach Livewell on +91 93133 66397 or thagyaanas@gmail.com."},
+    {k:["where","made","manufactur","bharuch","gujarat","fssai","licen","nabl","certif","halal","lab","tested"],a:"It's made by Livewell in Bharuch, Gujarat, under FSSAI licence no. 20726007000342, and tested by an NABL-certified laboratory. For other certifications, please ask customer care."},
+    {k:["health","benefit","cure","medicine","treat","depress","anxiety","sick","pregnan","baby","child","kid","weight","cholesterol","doctor","safe for","disease","heal"],a:"Talbina is food, not medicine, so I can't give medical advice. If you have a health condition, are pregnant, or are buying for a young child, please check with your doctor first."},
+    {k:["buy","order","purchase","checkout","pay","cart"],a:"Pick 1, 2 or 3 boxes in the Range section and press Buy now. Payment is completed on livewellnourish.com."},
+    {k:["thank","thanks","shukran","jazak"],a:"You're welcome. Enjoy your bowl!"}
+  ];
+  var FALLBACK = "I don't have that detail. I can help with what talbina is, its story, ingredients, nutrition, how to make it, prices and storage. For anything else, call +91 93133 66397 or email thagyaanas@gmail.com.";
+  function local(q){
+    var s = " " + q.toLowerCase() + " ", best = null, score = 0, second = null, s2 = 0;
+    KB.forEach(function(e){ var n = 0; e.k.forEach(function(k){ if(s.indexOf(k) > -1) n += k.length > 4 ? 2 : 1; });
+      if(n > score){ second = best; s2 = score; score = n; best = e; } else if(n > s2){ second = e; s2 = n; } });
+    if(!best) return FALLBACK;
+    return second && s2 >= 2 ? best.a + "\n\n" + second.a : best.a;
+  }
+
+  var $ = function(id){ return document.getElementById(id); };
+  var fab = $("lwFab"), box = $("lwChat"), log = $("lwLog"), form = $("lwForm"), input = $("lwInput"), send = $("lwSend"), quick = $("lwQuick"), mode = $("lwMode");
+  var hist = [], busy = false, sample = null, started = false;
+  var ENDPOINT = (window.LIVEWELL_CHAT_ENDPOINT || "").trim();
+  try { if(window.claude && typeof window.claude.use === "function"){ window.claude.use("sample").then(function(s){ sample = s || null; }).catch(function(){}); } } catch(e){}
+
+  function bubble(text, who){ var d = document.createElement("div"); d.className = "lw-msg " + who; if(text === null){ d.innerHTML = '<span class="lw-typing"><i></i><i></i><i></i></span>'; } else { d.textContent = text; } log.appendChild(d); log.scrollTop = log.scrollHeight; return d; }
+  function aiMessages(q){ var m = hist.slice(-8).map(function(h){ return {role:h.who === "me" ? "user" : "assistant", content:h.text}; }); while(m.length && m[0].role !== "user") m.shift(); m.push({role:"user", content:q}); return m; }
+
+  function viaSample(q, el){
+    var convo = hist.slice(-6).map(function(h){ return (h.who === "me" ? "Customer: " : "Assistant: ") + h.text; }).join("\n");
+    return sample(SYSTEM + "\n\nCONVERSATION SO FAR:\n" + convo + "\n\nCustomer: " + q + "\nAssistant:", {modelTier:"quick", cache:false, onText:function(e){ if(e && e.text){ el.textContent = e.text; log.scrollTop = log.scrollHeight; } }})
+      .then(function(r){ return (r && r.text || "").trim(); });
+  }
+  function viaEndpoint(q){
+    var ctl = new AbortController(), t = setTimeout(function(){ ctl.abort(); }, 20000);
+    return fetch(ENDPOINT, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({messages:aiMessages(q)}), signal:ctl.signal})
+      .then(function(r){ clearTimeout(t); if(!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function(j){ return (j && j.reply || "").trim(); });
+  }
+  function ask(q){
+    q = (q || "").trim(); if(!q || busy) return;
+    busy = true; send.disabled = true; quick.style.display = "none";
+    bubble(q, "me");
+    var el = bubble(null, "bot");
+    var p = sample ? viaSample(q, el) : (ENDPOINT ? viaEndpoint(q) : new Promise(function(res){ setTimeout(function(){ res(""); }, 450); }));
+    p.catch(function(err){ if(err && err.code === "not_granted") sample = null; return ""; })
+     .then(function(t){ t = t || local(q); el.textContent = t; log.scrollTop = log.scrollHeight;
+       hist.push({who:"me", text:q}); hist.push({who:"bot", text:t}); busy = false; send.disabled = false; input.focus(); });
+  }
+  function open(on){
+    box.classList.toggle("on", on); fab.style.display = on ? "none" : "";
+    if(on){
+      if(!started){ started = true;
+        mode.textContent = (sample || ENDPOINT) ? "AI assistant · answers about Talbina Royale" : "Assistant · answers about Talbina Royale";
+        bubble("Assalamu alaikum, and welcome! Ask me anything about Talbina Royale, or tap a question below.", "bot");
+        ["How do I make it?", "What's the story behind it?", "What's in it?", "How much is it?", "Any allergens?"].forEach(function(t){
+          var b = document.createElement("button"); b.type = "button"; b.textContent = t; b.addEventListener("click", function(){ ask(t); }); quick.appendChild(b); });
+      }
+      setTimeout(function(){ input.focus(); }, 50);
+    } else { fab.focus(); }
+  }
+  fab.addEventListener("click", function(){ open(true); });
+  $("lwClose").addEventListener("click", function(){ open(false); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && box.classList.contains("on")) open(false); });
+  form.addEventListener("submit", function(e){ e.preventDefault(); var v = input.value; input.value = ""; ask(v); });
 })();
 </script>
 </body>
