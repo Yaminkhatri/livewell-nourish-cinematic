@@ -483,6 +483,70 @@
     .asm-copy .step p{font-size:17px}
     .asm-cap{display:none}
   }
+
+  /* ================= WHAT'S INSIDE: ingredient reel ================= */
+  .ingredients{padding:12vh 0 0}
+  .ingredients .ing-head .lead{color:var(--ink)}
+  .reel{position:relative;height:500vh;margin-top:6vh}
+  .reel-stage{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--paper)}
+  .reel-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 30% 55%,var(--g,rgba(233,199,122,.55)) 0%,rgba(255,248,242,0) 70%);transition:background .6s ease}
+  .reel-tabs{position:absolute;top:calc(74px + 2.2vh);left:50%;transform:translateX(-50%);z-index:5;display:flex;gap:.4rem;padding:.4rem;border-radius:999px;
+    background:rgba(255,248,242,.9);box-shadow:0 0 0 1px var(--line),0 14px 30px -18px rgba(31,33,31,.4);backdrop-filter:blur(8px);max-width:calc(100vw - 24px);overflow-x:auto;scrollbar-width:none}
+  .reel-tabs::-webkit-scrollbar{display:none}
+  .rtab{position:relative;display:flex;align-items:center;gap:.5rem;border:0;background:transparent;padding:.65rem 1.05rem .75rem;border-radius:999px;cursor:pointer;
+    font:600 14px/1 Inter,system-ui,sans-serif;color:var(--ink-soft);white-space:nowrap;transition:background .3s,color .3s}
+  .rtab .rt-n{font:700 13px/1 "Cormorant Garamond",serif;color:var(--gold)}
+  .rtab:hover{color:var(--emerald)}
+  .rtab.on{background:var(--emerald);color:var(--paper)}
+  .rtab.on .rt-n{color:var(--gold)}
+  .rtab .rt-bar{position:absolute;left:1rem;right:1rem;bottom:.32rem;height:2px;border-radius:2px;background:rgba(255,248,242,.18);overflow:hidden;opacity:0;transition:opacity .3s}
+  .rtab.on .rt-bar{opacity:1}
+  .rtab .rt-bar b{display:block;height:100%;width:var(--fill,0%);background:var(--gold)}
+  .rtab:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .reel-track{position:absolute;inset:0;display:flex;width:500%;will-change:transform}
+  .ipanel{position:relative;width:20%;height:100%;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:4vw;padding:clamp(150px,18vh,190px) 6vw 9vh}
+  .ip-vis{position:relative;height:min(60vh,560px);display:grid;place-items:center}
+  .ip-word{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:700 clamp(90px,15vw,240px)/.85 "Cormorant Garamond",serif;letter-spacing:-.04em;
+    color:transparent;-webkit-text-stroke:2px var(--tint);opacity:.55;white-space:nowrap;pointer-events:none;will-change:transform}
+  .ip-ring{position:absolute;width:min(46vh,430px);height:min(46vh,430px);border-radius:50%;
+    background:radial-gradient(circle at 40% 35%,#fff 0%,var(--glow) 55%,rgba(255,255,255,0) 72%);box-shadow:0 0 0 1px rgba(214,177,94,.35)}
+  .ip-img{position:relative;width:min(92%,620px);max-height:100%;object-fit:contain;filter:drop-shadow(0 40px 46px rgba(31,33,31,.28));will-change:transform}
+  .ip-txt{max-width:520px}
+  .ip-num{display:block;font:700 22px/1 "Cormorant Garamond",serif;color:var(--deep);letter-spacing:.04em}
+  .ip-num em{font-style:normal;font-weight:500;color:var(--ink-soft);font-size:16px}
+  .ip-txt h3{margin-top:.9rem;font:600 clamp(52px,6.4vw,96px)/.95 "Cormorant Garamond",serif;color:var(--emerald);letter-spacing:-.02em}
+  .ip-lat{margin-top:.6rem;font:italic 500 clamp(18px,1.5vw,22px)/1.2 "Cormorant Garamond",serif;color:var(--deep)}
+  .ip-txt p{margin-top:1.5rem;font-size:clamp(17px,1.35vw,20px);line-height:1.65;color:var(--ink);max-width:36ch}
+  .ip-facts{list-style:none;margin:1.8rem 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem}
+  .ip-facts li{background:#fff;border:1px solid var(--line);border-top:3px solid var(--tint);border-radius:8px;padding:.8rem .9rem}
+  .ip-facts span{display:block;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+  .ip-facts b{display:block;margin-top:.35rem;font-size:16px;font-weight:600;color:var(--emerald);line-height:1.25}
+  .ip-txt > *{transition:opacity .6s ease,transform .6s cubic-bezier(.22,.61,.36,1)}
+  .ipanel:not(.act) .ip-txt > *{opacity:.0;transform:translateY(18px)}
+  .ipanel.act .ip-txt > *:nth-child(2){transition-delay:.05s}.ipanel.act .ip-txt > *:nth-child(3){transition-delay:.1s}
+  .ipanel.act .ip-txt > *:nth-child(4){transition-delay:.15s}.ipanel.act .ip-txt > *:nth-child(5){transition-delay:.2s}
+  .reel-hint{position:absolute;left:50%;bottom:2.6vh;transform:translateX(-50%);z-index:5;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--emerald);opacity:.75}
+  @media(max-width:1024px){
+    .ipanel{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:center;gap:2vh;padding:calc(74px + 2.2vh + 64px) 22px 6vh}
+    .ip-vis{height:30vh}
+    .ip-ring{width:26vh;height:26vh}
+    .ip-word{font-size:clamp(70px,24vw,140px)}
+    .ip-txt{max-width:none}
+    .ip-txt h3{font-size:clamp(40px,11vw,58px);margin-top:.5rem}
+    .ip-txt p{margin-top:.9rem;font-size:16.5px}
+    .ip-facts{margin-top:1.1rem;gap:.4rem}
+    .ip-facts li{padding:.6rem .6rem}
+    .ip-facts span{font-size:10.5px}
+    .ip-facts b{font-size:14px}
+    .reel-tabs{left:12px;right:12px;transform:none;justify-content:flex-start}
+    .rtab{padding:.6rem .85rem .7rem;font-size:13px}
+    .reel-hint{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){.ip-txt > *{transition:none}.ipanel:not(.act) .ip-txt > *{opacity:1;transform:none}}
+
+  .ip-vis{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%)}
+  .ip-word{opacity:.45}
+  @media(max-width:1024px){.ipanel{padding-bottom:96px}.ip-vis{height:27vh;overflow:visible;-webkit-mask-image:none;mask-image:none}}
 </style>
 </head>
 <body>
@@ -624,66 +688,83 @@
     </div>
     <p class="lead rv">Five real ingredients and one sachet. No gums, no colours, no “flavour system.” If it isn’t on this list, it isn’t in the bowl.</p>
   </div>
-  <div class="stack" id="stack">
-    <div class="card-slot">
-      <article class="ing-card">
-        <div class="ic-img"><img src="assets/ing-barley.webp" alt="Whole barley" /></div>
-        <div class="ic-txt">
-          <span class="num">01 / 05</span>
-          <h3>Barley</h3>
-          <div class="lat">Hordeum vulgare</div>
-          <p>Whole grain, bran intact. The foundation of Talbina and the reason the bowl holds its warmth all the way to the last spoon.</p>
-          <span class="tag">Whole Grain</span>
-        </div>
-      </article>
-    </div>
-    <div class="card-slot">
-      <article class="ing-card">
-        <div class="ic-img"><img src="assets/ing-almond.webp" alt="Almonds" /></div>
-        <div class="ic-txt">
-          <span class="num">02 / 05</span>
-          <h3>Almonds</h3>
-          <div class="lat">Prunus dulcis</div>
-          <p>Ground into the blend for body and a quiet sweetness. Real fat and real texture — the difference you notice in the first spoon.</p>
-          <span class="tag">Premium Nut</span>
-        </div>
-      </article>
-    </div>
-    <div class="card-slot">
-      <article class="ing-card">
-        <div class="ic-img"><img src="assets/ing-pistachio.webp" alt="Pistachios" /></div>
-        <div class="ic-txt">
-          <span class="num">03 / 05</span>
-          <h3>Pistachios</h3>
-          <div class="lat">Pistacia vera</div>
-          <p>The green note. Lifts the bowl from plain porridge into something you’d order in a café — without the café price.</p>
-          <span class="tag">Premium Nut</span>
-        </div>
-      </article>
-    </div>
-    <div class="card-slot">
-      <article class="ing-card">
-        <div class="ic-img"><img src="assets/ing-walnut.webp" alt="Walnuts" /></div>
-        <div class="ic-txt">
-          <span class="num">04 / 05</span>
-          <h3>Walnuts</h3>
-          <div class="lat">Juglans regia</div>
-          <p>Cold-pressed flavour, deeply toasted. Adds the savoury edge that keeps a sweet bowl from tipping over into dessert.</p>
-          <span class="tag">Cold Pressed</span>
-        </div>
-      </article>
-    </div>
-    <div class="card-slot">
-      <article class="ing-card">
-        <div class="ic-img"><img src="assets/ing-pumpkin.webp" alt="Pumpkin seeds" /></div>
-        <div class="ic-txt">
-          <span class="num">05 / 05</span>
-          <h3>Pumpkin Seed</h3>
-          <div class="lat">Cucurbita pepo</div>
-          <p>The finishing scatter. Crunch, minerals, and a little green bite that makes the last spoon as good as the first.</p>
-          <span class="tag">Finishing Touch</span>
-        </div>
-      </article>
+  <div class="reel" id="reel">
+    <div class="reel-stage" id="reelStage">
+      <div class="reel-bg" id="reelBg" aria-hidden="true"></div>
+      <div class="reel-tabs" role="tablist" aria-label="Ingredients"><button type="button" class="rtab on" data-i="0" style="--t:#E9C77A"><span class="rt-n">01</span><span class="rt-l">Barley</span><i class="rt-bar"><b></b></i></button><button type="button" class="rtab" data-i="1" style="--t:#D9905A"><span class="rt-n">02</span><span class="rt-l">Almonds</span><i class="rt-bar"><b></b></i></button><button type="button" class="rtab" data-i="2" style="--t:#A8C060"><span class="rt-n">03</span><span class="rt-l">Pistachios</span><i class="rt-bar"><b></b></i></button><button type="button" class="rtab" data-i="3" style="--t:#B88A5C"><span class="rt-n">04</span><span class="rt-l">Walnuts</span><i class="rt-bar"><b></b></i></button><button type="button" class="rtab" data-i="4" style="--t:#8FAA48"><span class="rt-n">05</span><span class="rt-l">Pumpkin Seed</span><i class="rt-bar"><b></b></i></button></div>
+      <div class="reel-track" id="reelTrack">
+        <article class="ipanel" data-i="0" style="--glow:rgba(233,199,122,.55);--tint:#E9C77A;--deep:#7A5A12">
+          <div class="ip-vis">
+            <span class="ip-word" aria-hidden="true">Barley</span>
+            <span class="ip-ring" aria-hidden="true"></span>
+            <img class="ip-img" src="assets/ing-barley.webp" alt="Barley" loading="lazy" />
+          </div>
+          <div class="ip-txt">
+            <span class="ip-num">01 <em>/ 05</em></span>
+            <h3>Barley</h3>
+            <div class="ip-lat">Hordeum vulgare</div>
+            <p>Whole grain, bran intact. The foundation of Talbina and the reason the bowl holds its warmth all the way to the last spoon.</p>
+            <ul class="ip-facts"><li><span>Role</span><b>The base</b></li><li><span>Taste</span><b>Mellow, nutty</b></li><li><span>Texture</span><b>Smooth, creamy</b></li></ul>
+          </div>
+        </article>
+        <article class="ipanel" data-i="1" style="--glow:rgba(217,144,90,.45);--tint:#D9905A;--deep:#7A3A14">
+          <div class="ip-vis">
+            <span class="ip-word" aria-hidden="true">Almonds</span>
+            <span class="ip-ring" aria-hidden="true"></span>
+            <img class="ip-img" src="assets/ing-almond.webp" alt="Almonds" loading="lazy" />
+          </div>
+          <div class="ip-txt">
+            <span class="ip-num">02 <em>/ 05</em></span>
+            <h3>Almonds</h3>
+            <div class="ip-lat">Prunus dulcis</div>
+            <p>Ground into the blend for body and a quiet sweetness. Real fat and real texture, the difference you notice in the first spoon.</p>
+            <ul class="ip-facts"><li><span>Role</span><b>Richness</b></li><li><span>Taste</span><b>Gently sweet</b></li><li><span>Texture</span><b>Full-bodied</b></li></ul>
+          </div>
+        </article>
+        <article class="ipanel" data-i="2" style="--glow:rgba(168,192,96,.45);--tint:#A8C060;--deep:#46601A">
+          <div class="ip-vis">
+            <span class="ip-word" aria-hidden="true">Pistachios</span>
+            <span class="ip-ring" aria-hidden="true"></span>
+            <img class="ip-img" src="assets/ing-pistachio.webp" alt="Pistachios" loading="lazy" />
+          </div>
+          <div class="ip-txt">
+            <span class="ip-num">03 <em>/ 05</em></span>
+            <h3>Pistachios</h3>
+            <div class="ip-lat">Pistacia vera</div>
+            <p>The green note. Lifts the bowl from plain porridge into something you'd order in a café, without the café price.</p>
+            <ul class="ip-facts"><li><span>Role</span><b>Flavour & colour</b></li><li><span>Taste</span><b>Buttery, bright</b></li><li><span>Texture</span><b>Soft crunch</b></li></ul>
+          </div>
+        </article>
+        <article class="ipanel" data-i="3" style="--glow:rgba(184,138,92,.45);--tint:#B88A5C;--deep:#5C3A1A">
+          <div class="ip-vis">
+            <span class="ip-word" aria-hidden="true">Walnuts</span>
+            <span class="ip-ring" aria-hidden="true"></span>
+            <img class="ip-img" src="assets/ing-walnut.webp" alt="Walnuts" loading="lazy" />
+          </div>
+          <div class="ip-txt">
+            <span class="ip-num">04 <em>/ 05</em></span>
+            <h3>Walnuts</h3>
+            <div class="ip-lat">Juglans regia</div>
+            <p>Deeply toasted flavour. Adds the savoury edge that keeps a sweet bowl from tipping over into dessert.</p>
+            <ul class="ip-facts"><li><span>Role</span><b>Depth</b></li><li><span>Taste</span><b>Toasty, earthy</b></li><li><span>Texture</span><b>Hearty</b></li></ul>
+          </div>
+        </article>
+        <article class="ipanel" data-i="4" style="--glow:rgba(143,170,72,.45);--tint:#8FAA48;--deep:#3E5418">
+          <div class="ip-vis">
+            <span class="ip-word" aria-hidden="true">Pumpkin Seed</span>
+            <span class="ip-ring" aria-hidden="true"></span>
+            <img class="ip-img" src="assets/ing-pumpkin.webp" alt="Pumpkin Seed" loading="lazy" />
+          </div>
+          <div class="ip-txt">
+            <span class="ip-num">05 <em>/ 05</em></span>
+            <h3>Pumpkin Seed</h3>
+            <div class="ip-lat">Cucurbita pepo</div>
+            <p>The finishing scatter. Crunch, minerals, and a little green bite that makes the last spoon as good as the first.</p>
+            <ul class="ip-facts"><li><span>Role</span><b>The finish</b></li><li><span>Taste</span><b>Green, savoury</b></li><li><span>Texture</span><b>Crisp</b></li></ul>
+          </div>
+        </article>
+      </div>
+      <div class="reel-hint" aria-hidden="true">Scroll to explore each ingredient</div>
     </div>
   </div>
 </section>
@@ -863,7 +944,7 @@
   var lenis = null;
   try {
     if(window.Lenis && !reduce){
-      lenis = new window.Lenis({duration:1.15, smoothWheel:true, easing:function(t){ return Math.min(1, 1.001 - Math.pow(2, -10*t)); }});
+      lenis = new window.Lenis({duration:1.15, smoothWheel:true, easing:function(t){ return Math.min(1, 1.001 - Math.pow(2, -10*t)); }}); window.__lenis = lenis;
       var raf = function(t){ lenis.raf(t); requestAnimationFrame(raf); };
       requestAnimationFrame(raf);
     }
@@ -1458,6 +1539,71 @@ window.LIVEWELL_CHAT_ENDPOINT = window.LIVEWELL_CHAT_ENDPOINT || "";
   $("lwClose").addEventListener("click", function(){ open(false); });
   document.addEventListener("keydown", function(e){ if(e.key === "Escape" && box.classList.contains("on")) open(false); });
   form.addEventListener("submit", function(e){ e.preventDefault(); var v = input.value; input.value = ""; ask(v); });
+})();
+</script>
+
+<script>
+(function(){
+  var reel = document.getElementById("reel"); if(!reel) return;
+  var track = document.getElementById("reelTrack"), bg = document.getElementById("reelBg");
+  var panels = Array.prototype.slice.call(document.querySelectorAll(".ipanel"));
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".rtab"));
+  var n = panels.length, reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var glows = panels.map(function(p){ return getComputedStyle(p).getPropertyValue("--glow").trim(); });
+  var cur = -1, ticking = false;
+  function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
+  function smooth(t){ return t*t*(3-2*t); }
+  function progress(){
+    var r = reel.getBoundingClientRect(), total = r.height - window.innerHeight;
+    return total > 0 ? clamp(-r.top / total, 0, 1) : 0;
+  }
+  function render(){
+    ticking = false;
+    var f = progress() * (n - 1);                 /* 0 .. n-1 */
+    var i = Math.min(n - 2, Math.floor(f)), frac = f - i;
+    if(f >= n - 1){ i = n - 2; frac = 1; }
+    var moved = reduce ? Math.round(frac) : smooth(clamp((frac - .3) / .4, 0, 1));   /* hold, slide, hold */
+    var pos = i + moved;
+    track.style.transform = "translate3d(" + (-pos * (100 / n)) + "%,0,0)";
+    var act = Math.round(pos);
+    if(act !== cur){
+      cur = act;
+      panels.forEach(function(p, k){ p.classList.toggle("act", k === act); });
+      tabs.forEach(function(t, k){ t.classList.toggle("on", k === act); t.setAttribute("aria-selected", k === act ? "true" : "false"); });
+      if(bg) bg.style.setProperty("--g", glows[act] || "");
+      var on = tabs[act]; if(on && on.scrollIntoView && window.innerWidth < 1025){ var tb = on.parentNode; tb.scrollTo({left: on.offsetLeft - tb.clientWidth/2 + on.offsetWidth/2, behavior: reduce ? "auto" : "smooth"}); }
+    }
+    /* progress within the active ingredient, shown on its tab */
+    var within = act === i ? (frac < .3 ? frac/.3 : 1) : (act === i + 1 ? (frac > .7 ? (frac-.7)/.3 : 0) : 1);
+    tabs.forEach(function(t, k){ t.style.setProperty("--fill", (k < act ? 100 : k === act ? Math.round(clamp(within,0,1)*100) : 0) + "%"); });
+    if(!reduce){
+      panels.forEach(function(p, k){
+        var d = k - pos;                           /* -1..1 around the active one */
+        if(Math.abs(d) > 1.2) return;
+        var img = p.querySelector(".ip-img"), word = p.querySelector(".ip-word");
+        if(img) img.style.transform = "translate3d(" + (d * -60) + "px," + (Math.abs(d) * 30) + "px,0) rotate(" + (d * -14) + "deg) scale(" + (1 - Math.abs(d) * .18) + ")";
+        if(word) word.style.transform = "translate(calc(-50% + " + (d * 220) + "px),-50%)";
+      });
+    }
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(render); } }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  window.addEventListener("resize", onScroll);
+  tabs.forEach(function(t, k){
+    t.addEventListener("click", function(){
+      var r = reel.getBoundingClientRect(), top = window.pageYOffset + r.top, total = r.height - window.innerHeight;
+      var y = top + total * (k / (n - 1));
+      if(window.__lenis && window.__lenis.scrollTo){ window.__lenis.scrollTo(y, {immediate: reduce}); } else { window.scrollTo({top: y, behavior: reduce ? "auto" : "smooth"}); }
+    });
+  });
+  /* gentle idle float on the active ingredient */
+  if(!reduce){
+    (function floatLoop(t){
+      var p = panels[cur]; if(p){ var ring = p.querySelector(".ip-ring"); if(ring) ring.style.transform = "scale(" + (1 + Math.sin(t/1400)*.025) + ")"; }
+      requestAnimationFrame(floatLoop);
+    })(0);
+  }
+  render();
 })();
 </script>
 </body>
